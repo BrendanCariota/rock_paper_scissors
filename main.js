@@ -1,7 +1,15 @@
 // Global Variables
-const playerSelection = window.prompt('Make you choice')
 let winningPhrase
+let gameWinner
+let playerScore
+let computerScore
 
+
+// Player Choice
+const playerChoice = () => {
+    let playerChoice = window.prompt('Make you choice')
+    return playerChoice
+}
 
 // Computer Player
 const computerPlay = () => {
@@ -20,31 +28,35 @@ const computerPlay = () => {
     return computerChoice
 }
 
-const computerSelection = computerPlay()
-
 // Single Round
-const playRound = (playerSelection, computerSelection) => {
-    const newPlayerSelection = playerSelection.toLowerCase()
-    const newComputerSelection = computerSelection.toLowerCase()
+const playRound = () => {
+    const newPlayerSelection = playerChoice().toLowerCase()
+    const newComputerSelection = computerPlay().toLowerCase()
 
     if (newPlayerSelection === 'rock' && newComputerSelection === 'rock') {
-        winningPhrase = 'You Tied! Rock ties with Rock'
+        winningPhrase = 'You Tied! Rock ties with Rock' + ' No points awarded' + ' Current Score: Player: ' + playerScore + ' Computer: ' + computerScore
     }  else if (newPlayerSelection === 'rock' && newComputerSelection === 'paper') {
-        winningPhrase = 'You Lose! Rock loses to Paper'
+        computerScore++
+        winningPhrase = 'You Lose! Rock loses to Paper' + ' The Computer won a point' + ' Current Score: Player: ' + playerScore + ' Computer: ' + computerScore
     } else if (newPlayerSelection === 'rock' && newComputerSelection === 'scissors') {
-        winningPhrase = 'You Win! Rock beats Scissors'
+        playerScore++
+        winningPhrase = 'You Win! Rock beats Scissors' + ' You won a point' + ' Current Score: Player: ' + playerScore + ' Computer: ' + computerScore
     } else if (newPlayerSelection === 'paper' && newComputerSelection === 'rock') {
-        winningPhrase = 'You Win! Paper beats Rock'
+        playerScore++
+        winningPhrase = 'You Win! Paper beats Rock' + ' You won a point' + ' Current Score: Player: ' + playerScore + ' Computer: ' + computerScore
     } else if (newPlayerSelection === 'paper' && newComputerSelection === 'paper') {
-        winningPhrase = 'You Tied! Paper ties with Paper'
+        winningPhrase = 'You Tied! Paper ties with Paper' + ' No points awarded'
     } else if (newPlayerSelection === 'paper' && newComputerSelection === 'scissors') {
-        winningPhrase = 'You Lose! Paper loses to Scissors'
+        computerScore++
+        winningPhrase = 'You Lose! Paper loses to Scissors' + ' The Computer won a point' + ' Current Score: Player: ' + playerScore + ' Computer: ' + computerScore
     } else if (newPlayerSelection === 'scissors' && newComputerSelection === 'rock') {
-        winningPhrase = 'You Lose! Scissors loses to Rock'
+        computerScore++
+        winningPhrase = 'You Lose! Scissors loses to Rock' + ' The Computer won a point' + ' Current Score: Player: ' + playerScore + ' Computer: ' + computerScore
     } else if (newPlayerSelection === 'scissors' && newComputerSelection === 'paper') {
-        winningPhrase = 'You Win! Scissors beats paper'
+        playerScore++
+        winningPhrase = 'You Win! Scissors beats Paper' + ' You won a point' + ' Current Score: Player: ' + playerScore + ' Computer: ' + computerScore
     } else if (newPlayerSelection === 'scissors' && newComputerSelection === 'scissors') {
-        winningPhrase = 'You Tied! Scissors ties with Scissors'
+        winningPhrase = 'You Tied! Scissors ties with Scissors' + ' No points awarded'
     } else {
         winningPhrase = "Game Broken"
     }
@@ -55,9 +67,22 @@ const playRound = (playerSelection, computerSelection) => {
 
 // Game 
 const game = () => {
+    playerScore = 0
+    computerScore = 0
+
     for (let i = 0; i <= 4; i++) {
-        playRound(playerSelection, computerSelection)
+        console.log(playRound())
     }
+
+    if (playerScore === computerScore) {
+        gameWinner = 'YOU TIED'
+    } else if (playerScore < computerScore) {
+        gameWinner = 'YOU LOST'
+    } else {
+        gameWinner = 'YOU WON'
+    }
+
+    return gameWinner
 }
 
-console.log(playRound(playerSelection, computerSelection))
+console.log(game())
