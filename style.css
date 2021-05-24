@@ -1,0 +1,7 @@
+.scoreboard {
+  display: flex;
+}
+
+.playerSection {
+  margin-right: 20px;
+}
