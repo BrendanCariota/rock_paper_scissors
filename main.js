@@ -1,6 +1,5 @@
 // Global Variables
 let winningPhrase
-let gameWinner
 let playerScore = 0
 let computerScore = 0
 
@@ -15,6 +14,8 @@ const winnerBanner = document.querySelector('.winnerBanner')
 
 const playersScore = document.querySelector('.playerScore')
 const computersScore = document.querySelector('.computerScore')
+
+const gameWinner = document.querySelector('.gameWinner')
 
 // Computer Player
 const computerPlay = () => {
@@ -92,6 +93,18 @@ const playRound = (playerChoice, computersChoice) => {
         winnerBanner.innerText = 'You Tied! Scissors ties with Scissors' + ' No points awarded'
     } else {
         winnerBanner.innerText = "Game Broken"
+    }
+
+    if(playerScore >= 5) {
+        gameWinner.innerText = 'YOU HAVE WON!'
+        btns.forEach(btn => {
+            btn.disabled = true
+        })
+    } else if (computerScore >= 5) {
+        gameWinner.innerText = 'COMPUTER HAS WON!'
+        btns.forEach(btn => {
+            btn.disabled = true
+        })
     }
 
     return winningPhrase
